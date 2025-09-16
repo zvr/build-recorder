@@ -27,10 +27,9 @@ record_start(char *fname)
 {
     fout = fopen(fname, "w");
 
-    extern char schema[];
-    extern unsigned int schema_len;
+    extern char *schema;
 
-    fwrite(schema, sizeof (char), schema_len, fout);
+    fputs(schema, fout);
 
     fprintf(fout, "\n\n");
 }
