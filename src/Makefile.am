@@ -20,7 +20,6 @@ SCHEMA = ../doc/build-recorder-schema.ttl
 
 dist_data_DATA = $(SCHEMA)
 
-if HAVE_XXD
 schema.c: $(SCHEMA)
-	sed '/^#/d' $^ | $(XXD) -i -n schema > $@
-endif
+	sed -e '1i\const char * schema =' -e '/^#/d;s/\\/\\\\/g;s/"/\\\"/g;s/.*/"&\\n"/g;$a\;' $^ > $@
+
